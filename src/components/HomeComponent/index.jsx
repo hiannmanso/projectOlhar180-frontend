@@ -237,6 +237,12 @@ export default function HomeComponent() {
     boxShadow: 24,
     p: 4,
   };
+  const inputStyle = {
+    width: "194.4px",
+    height: "32px",
+    padding: "4px 0 0 5px",
+    margin: "5px 0 0 0",
+  };
   return (
     <s.HomeContainer>
       <ToastContainer />
@@ -283,6 +289,7 @@ export default function HomeComponent() {
                 id="standard-basic"
                 variant="standard"
                 type="date"
+                style={inputStyle}
                 value={infosTask.finalDate}
                 onChange={(e) => {
                   setInfosTask({ ...infosTask, finalDate: e.target.value });

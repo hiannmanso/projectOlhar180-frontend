@@ -20,6 +20,9 @@ const GlobalStyle = createGlobalStyle`
   
         }
   }
+  input{
+    width:100px;
+  }
 `;
 
 export default GlobalStyle;
