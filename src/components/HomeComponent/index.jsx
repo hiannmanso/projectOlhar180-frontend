@@ -39,7 +39,10 @@ export default function HomeComponent() {
   console.log(url, "URLLL");
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  if (!token) navigate("/signin");
+  if (!token) {
+    navigate("/signin");
+  }
+
   const [tasks, setTasks] = useState();
   const [newTask, setNewTasks] = useState(false);
   const [open, setOpen] = useState(false);
