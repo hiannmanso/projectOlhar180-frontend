@@ -18,11 +18,11 @@ import {
 } from "@mui/material";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
-import {
-  LocalizationProvider,
-  DatePicker,
-  AdapterDayjs,
-} from "@mui/x-date-pickers";
+// import {
+//   LocalizationProvider,
+//   DatePicker,
+//   AdapterDayjs,
+// } from "@mui/x-date-pickers";
 
 import axios from "axios";
 import * as s from "../HomeComponent/styles";
@@ -276,7 +276,7 @@ export default function HomeComponent() {
               />
             </div>
             <div className="inputbox">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["DatePicker"]}>
                   <DatePicker
                     label="Completion date"
@@ -284,7 +284,7 @@ export default function HomeComponent() {
                     onChange={handleDateChange}
                   />
                 </DemoContainer>
-              </LocalizationProvider>
+              </LocalizationProvider> */}
             </div>
             <div className="inputbox">
               <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
