@@ -137,7 +137,7 @@ export default function HomeComponent() {
         setInfosTask({
           title: response.data.title,
           describe: response.data.describe,
-          finalDate: null,
+          finalDate: response.data.finalDate,
           priority: response.data.priority,
         });
         handleOpen();
@@ -281,8 +281,8 @@ export default function HomeComponent() {
             <div className="inputbox">
               <TextField
                 id="standard-basic"
-                label="completion date"
                 variant="standard"
+                type="date"
                 value={infosTask.finalDate}
                 onChange={(e) => {
                   setInfosTask({ ...infosTask, finalDate: e.target.value });

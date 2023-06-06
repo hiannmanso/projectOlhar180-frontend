@@ -67,6 +67,11 @@ export const HomeContainer = styled.div`
   td {
     text-align: center;
   }
+  .inputbox {
+    width: 100px;
+    height: 70px;
+    margin: 5px;
+  }
 `;
 export const ButtonSubmit = styled.button`
   width: 150px;
