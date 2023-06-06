@@ -169,7 +169,7 @@ export default function HomeComponent() {
             title: "",
             priority: "",
           });
-          console.log(err, "info task", formattedDate.toString());
+          console.log(err);
         });
     } else {
       axios({
