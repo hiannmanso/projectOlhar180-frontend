@@ -1,14 +1,17 @@
-import * as React from "react";
+import { useState, useContext } from "react";
 import { TextField } from "@mui/material";
 import { Button, Link } from "@mui/material";
 import logo from "../../assets/logo.png";
 import * as s from "./styles.jsx";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import AuthContext from "../../contexts/AuthContext";
 
 export default function SignIn() {
+  const { url } = useContext(AuthContext);
+  console.log(url);
   const navigate = useNavigate();
-  const [infosInput, setInfosInput] = React.useState({
+  const [infosInput, setInfosInput] = useState({
     email: "",
     password: " ",
   });
@@ -16,7 +19,7 @@ export default function SignIn() {
     console.log(infosInput);
     axios({
       method: "POST",
-      url: `http://localhost:5000/signin`,
+      url: `${url}/signin`,
       data: infosInput,
     })
       .then((response) => {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { TextField } from "@mui/material";
 import { Button, Link } from "@mui/material";
 import logo from "../../assets/logo.png";
@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthContext from "../../contexts/AuthContext";
 export default function SignUp() {
+  const { url } = useContext(AuthContext);
   const navigate = useNavigate();
   const [infosInput, setInfosInput] = useState({
     username: "",
@@ -19,7 +21,7 @@ export default function SignUp() {
     console.log(infosInput);
     axios({
       method: "post",
-      url: `http://localhost:5000/signup`,
+      url: `${url}/signup`,
       data: infosInput,
     })
       .then((response) => {

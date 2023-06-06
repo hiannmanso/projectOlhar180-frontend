@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   Table,
   TableBody,
@@ -29,8 +29,10 @@ import editButton from "../../assets/edit-button.gif";
 import newButton from "../../assets/new-button.gif";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthContext from "../../contexts/AuthContext";
 
 export default function HomeComponent() {
+  const { url } = useContext(AuthContext);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   if (!token) navigate("/signin");
@@ -51,7 +53,7 @@ export default function HomeComponent() {
   useEffect(() => {
     axios({
       method: "GET",
-      url: "http://localhost:5000/tasks",
+      url: "${url}/tasks",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -80,7 +82,7 @@ export default function HomeComponent() {
   function changeStatus(taskId) {
     axios({
       method: "put",
-      url: `http://localhost:5000/tasks/status/${taskId}`,
+      url: `${url}/tasks/status/${taskId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -96,7 +98,7 @@ export default function HomeComponent() {
     if (confirm("Do you want to delete this task?")) {
       axios({
         method: "DELETE",
-        url: `http://localhost:5000/tasks/${taskId}`,
+        url: `${url}/tasks/${taskId}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -118,7 +120,7 @@ export default function HomeComponent() {
   function getInfosTask(taskId) {
     axios({
       method: "get",
-      url: `http://localhost:5000/tasks/${taskId}`,
+      url: `${url}/tasks/${taskId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -140,7 +142,7 @@ export default function HomeComponent() {
     if (infosModal.button === "EDIT") {
       axios({
         method: "put",
-        url: `http://localhost:5000/tasks/${infosModal.taskId}`,
+        url: `${url}/tasks/${infosModal.taskId}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -172,7 +174,7 @@ export default function HomeComponent() {
     } else {
       axios({
         method: "POST",
-        url: `http://localhost:5000/tasks`,
+        url: `${url}/tasks`,
         data: infosTask,
         headers: {
           Authorization: `Bearer ${token}`,
