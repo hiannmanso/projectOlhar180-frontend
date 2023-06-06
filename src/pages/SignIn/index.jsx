@@ -13,7 +13,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   const [infosInput, setInfosInput] = useState({
     email: "",
-    password: " ",
+    password: "",
   });
   function loginAccount() {
     console.log(infosInput);
