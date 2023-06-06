@@ -16,14 +16,6 @@ import {
   FormControl,
   Select,
 } from "@mui/material";
-// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-
-// import {
-//   LocalizationProvider,
-//   DatePicker,
-//   AdapterDayjs,
-// } from "@mui/x-date-pickers";
-
 import axios from "axios";
 import * as s from "../HomeComponent/styles";
 import { useNavigate } from "react-router-dom";
@@ -71,10 +63,6 @@ export default function HomeComponent() {
       })
       .catch((err) => console.log(err.data.error));
   }, [newTask]);
-
-  function handleDateChange(date) {
-    setInfosTask({ ...infosTask, finalDate: date });
-  }
 
   function handleChange(event) {
     setInfosTask({ ...infosTask, priority: event.target.value });
@@ -296,17 +284,7 @@ export default function HomeComponent() {
                 }}
               />
             </div>
-            <div className="inputbox">
-              {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["DatePicker"]}>
-                  <DatePicker
-                    label="Completion date"
-                    value={infosTask.finalDate}
-                    onChange={handleDateChange}
-                  />
-                </DemoContainer>
-              </LocalizationProvider> */}
-            </div>
+            <div className="inputbox"></div>
             <div className="inputbox">
               <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="demo-simple-select-standard-label">
@@ -345,60 +323,64 @@ export default function HomeComponent() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {tasks.map((task) => {
-                return (
-                  <TableRow
-                    style={{
-                      backgroundColor:
-                        task.status === "feito" ? "#14c32047" : "initial",
-                    }}
-                    key={task.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      onClick={() => {
-                        changeStatus(task.id);
-                      }}
-                    >
-                      {task.title}
-                    </TableCell>
-                    <TableCell align="right">{task.priority}</TableCell>
-                    <TableCell align="right">
-                      {task.finalDate.slice(0, 10)}
-                    </TableCell>
-                    <TableCell align="right">{task.describe}</TableCell>
-                    <TableCell
-                      align="right"
+              {tasks
+                .sort((a, b) => a.id - b.id)
+                .map((task) => {
+                  return (
+                    <TableRow
                       style={{
-                        backgroundColor: "initial",
+                        backgroundColor:
+                          task.status === "feito" ? "#14c32047" : "initial",
                       }}
+                      key={task.id}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <div className="images">
-                        <img
-                          style={{
-                            backgroundColor:
-                              task.status === "feito" ? "#14c32047" : "initial",
-                          }}
-                          className="image"
-                          src={deleteButton}
-                          alt="delete"
-                          onClick={() => deleteTask(task.id)}
-                        />
-                        <img
-                          className="image"
-                          src={editButton}
-                          onClick={() => {
-                            openModal("edit", task.id);
-                          }}
-                          alt="edit"
-                        />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        onClick={() => {
+                          changeStatus(task.id);
+                        }}
+                      >
+                        {task.title}
+                      </TableCell>
+                      <TableCell align="right">{task.priority}</TableCell>
+                      <TableCell align="right">
+                        {task.finalDate.slice(0, 10)}
+                      </TableCell>
+                      <TableCell align="right">{task.describe}</TableCell>
+                      <TableCell
+                        align="right"
+                        style={{
+                          backgroundColor: "initial",
+                        }}
+                      >
+                        <div className="images">
+                          <img
+                            style={{
+                              backgroundColor:
+                                task.status === "feito"
+                                  ? "#14c32047"
+                                  : "initial",
+                            }}
+                            className="image"
+                            src={deleteButton}
+                            alt="delete"
+                            onClick={() => deleteTask(task.id)}
+                          />
+                          <img
+                            className="image"
+                            src={editButton}
+                            onClick={() => {
+                              openModal("edit", task.id);
+                            }}
+                            alt="edit"
+                          />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>
