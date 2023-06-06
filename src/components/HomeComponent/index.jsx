@@ -16,7 +16,7 @@ import {
   FormControl,
   Select,
 } from "@mui/material";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
 // import {
 //   LocalizationProvider,
@@ -275,6 +275,17 @@ export default function HomeComponent() {
                 value={infosTask.describe}
                 onChange={(e) => {
                   setInfosTask({ ...infosTask, describe: e.target.value });
+                }}
+              />
+            </div>
+            <div className="inputbox">
+              <TextField
+                id="standard-basic"
+                label="completion date"
+                variant="standard"
+                value={infosTask.finalDate}
+                onChange={(e) => {
+                  setInfosTask({ ...infosTask, finalDate: e.target.value });
                 }}
               />
             </div>
