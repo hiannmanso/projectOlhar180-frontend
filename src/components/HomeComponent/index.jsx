@@ -50,14 +50,6 @@ export default function HomeComponent() {
     taskId: "",
   });
 
-  const today = new Date();
-
-  const year = today.getFullYear();
-  const mount = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
-
-  const formattedDate = `${day}/${mount}/${year}`;
-
   useEffect(() => {
     axios({
       method: "GET",
