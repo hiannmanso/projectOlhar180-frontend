@@ -40,7 +40,7 @@ export default function HomeComponent() {
   const [open, setOpen] = useState(false);
   const [infosTask, setInfosTask] = useState({
     title: "",
-    describe: "",
+    description: "",
     priority: "",
     finalDate: null,
   });
@@ -49,6 +49,15 @@ export default function HomeComponent() {
     button: "ADD",
     taskId: "",
   });
+
+  const today = new Date();
+
+  const year = today.getFullYear();
+  const mount = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+
+  const formattedDate = `${day}/${mount}/${year}`;
+
   useEffect(() => {
     axios({
       method: "GET",
@@ -124,7 +133,7 @@ export default function HomeComponent() {
         console.log(response);
         setInfosTask({
           title: response.data.title,
-          describe: response.data.describe,
+          description: response.data.description,
           finalDate: response.data.finalDate,
           priority: response.data.priority,
         });
@@ -145,7 +154,7 @@ export default function HomeComponent() {
         .then((response) => {
           console.log(response);
           setInfosTask({
-            describe: "",
+            description: "",
             finalDate: "",
             title: "",
             priority: "",
@@ -158,7 +167,7 @@ export default function HomeComponent() {
         })
         .catch((err) => {
           setInfosTask({
-            describe: "",
+            description: "",
             finalDate: null,
             title: "",
             priority: "",
@@ -176,7 +185,7 @@ export default function HomeComponent() {
       })
         .then((response) => {
           setInfosTask({
-            describe: "",
+            description: "",
             finalDate: null,
             title: "",
             priority: "",
@@ -188,7 +197,7 @@ export default function HomeComponent() {
         })
         .catch((error) => {
           setInfosTask({
-            describe: "",
+            description: "",
             finalDate: null,
             title: "",
             priority: "",
@@ -242,7 +251,7 @@ export default function HomeComponent() {
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-descriptiondby="modal-modal-description"
       >
         <Box sx={Modalstyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -264,11 +273,11 @@ export default function HomeComponent() {
             <div className="inputbox">
               <TextField
                 id="standard-basic"
-                label="describe"
+                label="description"
                 variant="standard"
-                value={infosTask.describe}
+                value={infosTask.description}
                 onChange={(e) => {
-                  setInfosTask({ ...infosTask, describe: e.target.value });
+                  setInfosTask({ ...infosTask, description: e.target.value });
                 }}
               />
             </div>
@@ -318,7 +327,7 @@ export default function HomeComponent() {
                 <TableCell>Title</TableCell>
                 <TableCell align="right">Priority</TableCell>
                 <TableCell align="right">Final date</TableCell>
-                <TableCell align="right">Describe</TableCell>
+                <TableCell align="right">Description</TableCell>
                 <TableCell align="right">Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -345,10 +354,8 @@ export default function HomeComponent() {
                         {task.title}
                       </TableCell>
                       <TableCell align="right">{task.priority}</TableCell>
-                      <TableCell align="right">
-                        {task.finalDate.slice(0, 10)}
-                      </TableCell>
-                      <TableCell align="right">{task.describe}</TableCell>
+                      <TableCell align="right">{task.finalDate}</TableCell>
+                      <TableCell align="right">{task.description}</TableCell>
                       <TableCell
                         align="right"
                         style={{
@@ -392,7 +399,7 @@ export default function HomeComponent() {
                 <TableCell>Title</TableCell>
                 <TableCell align="right">Priority</TableCell>
                 <TableCell align="right">Final date</TableCell>
-                <TableCell align="right">Describe</TableCell>
+                <TableCell align="right">Description</TableCell>
                 <TableCell align="right">Actions</TableCell>
               </TableRow>
             </TableHead>
