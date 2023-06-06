@@ -33,6 +33,7 @@ import AuthContext from "../../contexts/AuthContext";
 
 export default function HomeComponent() {
   const { url } = useContext(AuthContext);
+  console.log(url, "URLLL");
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   if (!token) navigate("/signin");
@@ -53,7 +54,7 @@ export default function HomeComponent() {
   useEffect(() => {
     axios({
       method: "GET",
-      url: "${url}/tasks",
+      url: `${url}/tasks`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -138,7 +139,6 @@ export default function HomeComponent() {
       .catch((err) => console.log(err));
   }
   async function sendTask() {
-    console.log(infosTask.finalDate);
     if (infosModal.button === "EDIT") {
       axios({
         method: "put",
@@ -268,8 +268,7 @@ export default function HomeComponent() {
                 variant="standard"
                 value={infosTask.describe}
                 onChange={(e) => {
-                  setInfosTask({ ...infosTask, describe: e.target.value }),
-                    console.log(infosModal);
+                  setInfosTask({ ...infosTask, describe: e.target.value });
                 }}
               />
             </div>
